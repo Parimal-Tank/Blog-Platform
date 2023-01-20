@@ -1,11 +1,58 @@
 const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('../models/userModel');
+
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
+
+const signup = (req, res, next) => {
+    User.find({ email: req.body.email })
+      .exec()
+      .then((user) => {
+        if (user.length >= 1) {
+          res.status(409).json({
+            message: "Already Hava a Account Using This Email , Try Another One",
+          });
+        } else {
+          bcrypt.hash(req.body.password, 10, (err, hash) => {
+            console.log(hash);
+            if (err) {
+              return res.status(500).json({
+                error: err,
+              });
+            } else {
+              const user = new User({
+                _id: new mongoose.Types.ObjectId(),
+                email: req.body.email,
+                password: hash,
+              });
+              user
+                .save()
+                .then((result) => {
+                  console.log(result);
+  
+                  res.status(201).json({
+                    message: "User Created Successfully",
+                  });
+                })
+                .catch((err) => {
+                  console.log(err);
+  
+                  res.status(505).json({
+                    error: err,
+                  });
+                });
+            }
+          });
+        }
+      });
+  }
+
+
+
 // Admin Login
 
-exports.user_login = (req, res , next) => {
+const login = (req, res , next) => {
 
     User.findOne({email : req.body.email})
     .exec()
@@ -56,7 +103,7 @@ exports.user_login = (req, res , next) => {
 }
 
 //logout user
-exports.user_logout = (req,res , next) => {
+const logout = (req,res , next) => {
 
    try{
       res.clearCookie("token");
@@ -71,4 +118,10 @@ exports.user_logout = (req,res , next) => {
         error : err
     })
    }
+}
+
+module.exports = {
+    logout,
+    login,
+    signup
 }
