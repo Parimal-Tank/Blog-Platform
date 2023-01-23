@@ -15,6 +15,9 @@
     },
     imagePath : {
         type : String
+    },
+    slug : {
+        type : String
     }
    })
 
