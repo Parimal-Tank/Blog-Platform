@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Blog Admin Portal  This is All Blog Page</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="../../public/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="../public/css/style.css">
+
+</head> 
+
+
+<body>
+    <header class="app-header fixed-top">
+    <%- include('partials/nav.ejs') -%>
+    <%- include('partials/menubar.ejs') -%>
+    </header>
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            
+            <h1 class="app-page-title">Add Category</h1>
+
+            <form class="form-inline d-flex justify-content-between">
+                <div class="form-group mx-sm-3 mb-4" style="width: 100%;">
+                  <label for="inputPassword2" class="sr-only">Category</label>
+                  <input type="text" class="form-control" id="inputPassword2" placeholder="Enter New Categorie">      
+                </div>
+              <button type="submit" class="btn btn-primary mr-2" style="width: 12%; height: 40px; color: white; margin-right: 1%;">Save</button>
+              <button type="button" class="btn btn-danger" style="width: 12%; height: 40px; color: white;">Cancel</button>
+            </form>
+    
+        </div><!--//container-fluid-->
+    </div><!--//app-content-->
+</body>

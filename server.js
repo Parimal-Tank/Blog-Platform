@@ -47,12 +47,43 @@ app.get('/login' , (req , res) => {
     res.render('login');
 })
 
-app.get('/' , (req , res) => {
-     res.render('index');
-})
+// app.get('/' , (req , res) => {
+//      res.render('allblog');
+// })
 
 app.get('/signup' , (req , res) =>{
     res.render('signup');
+})
+
+app.get('/notification' , (req , res) =>{
+    res.render('notification');
+})
+
+app.get('/account' , (req , res) =>{
+    res.render('account');
+})
+
+
+app.get('/allblog' , (req , res) =>{
+    res.render('allblog');
+})
+
+
+app.get('/addnewcategory' , (req , res) =>{
+    res.render('add-new-categories');
+})
+
+app.get('/addnewblog' , (req , res) =>{
+    res.render('add-new-blog');
+})
+
+app.get('/settings' , (req , res) =>{
+    res.render('settings');
+})
+
+
+app.get('/allcategory' , (req , res) =>{
+    res.render('all-categories');
 })
 
 module.exports = app;

@@ -7,7 +7,7 @@ const blogController = require('../controllers/blogs');
 router.post('/addblog' , blogController.addBlogDetails);
 
 
-router.get('/getblog' , blogController.getBlogDetails);
+router.get('/getallblog' , blogController.getBlogDetails);
 
 
 router.delete('/:id' , blogController.deleteBlog);

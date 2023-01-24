@@ -61,16 +61,18 @@ const getBlogDetails = (req , res , next) => {
                         _id : result._id,
                         title : result.title,
                         category : result.category,
-                        description : result.description
+                        description : result.description,
+                        imagePath : result.imagePath
                     }
                 })
             }
 
             if(responce.count > 0){
 
-               // res.status(200).json(responce);
+                console.log(responce);
+            //    res.status(200).json(responce);
 
-                res.render('index' , {data : responce});
+                 res.render('allblog' , {blogData : responce.blogs});
                 
             }else{
                 res.status(505).json({

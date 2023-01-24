@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <title>Blog Admin Portal  This is All Blog Page</title>
+    
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico"> 
+    
+    <!-- FontAwesome JS-->
+    <script defer src="../../public/plugins/fontawesome/js/all.min.js"></script>
+    
+    <!-- App CSS -->  
+    <link id="theme-style" rel="stylesheet" href="../public/css/style.css">
+
+</head> 
+
+
+<body>
+  <header class="app-header fixed-top">
+    <%- include('partials/nav.ejs') -%>
+    <%- include('partials/menubar.ejs') -%>
+  </header>
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            
+         <h1 class="app-page-title">All Category</h1>
+
+         <div>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Category Name</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+
+
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>Technology</td>
+                    <td><button class="btn btn-primary">Edit</button>  <button class="btn btn-danger">Delete</button>   </td>
+                    
+                  </tr>
+                  <!-- <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+            
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td colspan="2">Larry the Bird</td>
+                  </tr> -->
+                </tbody>
+              </table>
+         </div>
+
+           
+    
+        </div><!--//container-fluid-->
+    </div><!--//app-content-->
+</body>
+
+</html>

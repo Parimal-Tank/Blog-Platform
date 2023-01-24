@@ -10488,6 +10488,7 @@
   .btn:active,
   .btn:focus {
     text-decoration: none;
+    cursor: pointer;
   }
   .btn .bi {
     position: relative;
