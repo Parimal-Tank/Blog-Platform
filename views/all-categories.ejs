@@ -18,6 +18,8 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="../public/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head> 
 
 
@@ -43,23 +45,22 @@
 
 
                 <tbody>
+                  <% for(let i=0 ; i< category.length ; i++) { %>
                   <tr>
-                    <th scope="row">1</th>
-                    <td>Technology</td>
-                    <td><button class="btn btn-primary">Edit</button>  <button class="btn btn-danger">Delete</button>   </td>
-                    
+                    <th scope="row">
+                      <%= i+1 %>
+                    </th>
+                    <td>
+                      <%= category[i].categorys %>
+                    </td>
+                    <td>
+                      <button class="btn btn-primary"  value="<%= category[i]._id %>">Edit</button>  
+                      <button class="dltbtn btn btn-danger"  value="<%= category[i]._id %>">Delete</button>   
+                    </td>
                   </tr>
-                  <!-- <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-            
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                  </tr> -->
+                  <% } %>
                 </tbody>
+
               </table>
          </div>
 
@@ -67,6 +68,29 @@
     
         </div><!--//container-fluid-->
     </div><!--//app-content-->
+
+
+    <script>
+    $(document).ready(function () {
+
+              $('.dltbtn').on('click' , function() {
+
+                let id = $(this).val();
+                console.log(id);
+
+                $.ajax({
+                   type: "DELETE",
+                   url: `/category/${id}`,
+                   data: id,
+                   success: function(data) {
+                    location.href = "/category/getAllCategory";
+                   }
+                })
+              });
+
+
+           })
+    </script>
 </body>
 
 </html>

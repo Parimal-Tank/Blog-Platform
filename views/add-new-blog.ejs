@@ -29,35 +29,33 @@
         <div class="container-xl">
             
             <h1 class="app-page-title">Add New Blog</h1>
-
-            <form>
+            <!-- method="post" action="/blog/addblog" -->
+            <form method="post" action="/blog/addblog" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Blog Title</label>
-                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title">
+                  <input type="text" class="form-control" name ="title"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title">
                   <!-- <small id="#" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
 
                 <label class="mt-4">Category</label>
-                <select class="form-select mb-3">
-                    <option selected>Select Category</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select mb-3" name="categorys">
+                    <option selected >Select Category</option>
+                    <% for(let i=0 ; i< category.length ; i++) { %> 
+                        <option  value="<%= category[i].categorys %>"><%= category[i].categorys %></option>
+                     <% } %>
                 </select>
                 
-                <label>Description</label>
-                <textarea id="default" class="mt-4"></textarea>
+                <label >Description</label>
+                <textarea id="default" class="mt-4" name="description"></textarea>
 
                 
                 <div class="form-group mt-4">
                     <label for="exampleFormControlFile1">Select Image</label>
-                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo">
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-4">Submit</button>
+                <button type="submit" class="btn btn-primary mt-4" onclick="formSubmit('form' , '/blog/addblog' , '/blog/getallblog')">Submit</button>
               </form>
-                
-
             
         </div><!--//container-fluid-->
     </div><!--//app-content-->
@@ -70,6 +68,48 @@
         tinymce.init({
                 selector: 'textarea#default'
         });
+
+        // function formSubmit(form, url, target) {
+        //     alert("function called");
+        //     $(form).submit(function(event) {
+        //         $.post(url, $(form).serialize())
+        //             .done(function(res) {
+        //                 if (res.success) {
+        //                     window.location = target;
+        //                 }
+        //                 else {
+        //                     alert(res.error);
+        //                 }
+        //             })
+        //             .fail(function(res) {
+        //                 alert("Server Error: " + res.status + " " + res.statusText);
+
+        //             })
+        //         event.preventDefault();
+        //     });
+        // }
+
+
+        // $(document).ready( function () {
+
+        //     $('form').submit(function(event) {
+        //         $.post('/blog/addblog', $('form').serialize())
+        //             .done(function(res) {
+        //                 if (res.success) {
+        //                     location.href = "/blog/getallblog";
+        //                     // window.location = target;
+        //                 }
+        //                 else {
+        //                     alert(res.error);
+        //                 }
+        //             })
+        //             .fail(function(res) {
+        //                 alert("Server Error: " + res.status + " " + res.statusText);
+        //             })
+        //         event.preventDefault();
+        //     });
+
+        // })
     </script>
 
 </body>

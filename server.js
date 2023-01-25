@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const databaseConnect = require('./app');
 const path = require('path');
+const Category = require('./api/models/categoryModel');
 
 // for logout fuctionality
 const cookieParser = require('cookie-parser')
@@ -63,27 +64,58 @@ app.get('/account' , (req , res) =>{
     res.render('account');
 })
 
-
-app.get('/allblog' , (req , res) =>{
-    res.render('allblog');
+app.get('/help' , (req , res) =>{
+    res.render('help');
 })
+
+app.get('/reset-password' , (req , res) =>{
+    res.render('reset-password');
+})
+
+app.get('/addnewblog' , (req , res) =>{
+
+    Category.find()
+    .exec()
+    .then( result => {
+        const responce = {
+
+            count : result.length,
+            category : result.map(result => {
+                return{
+                    _id : result._id,
+                    categorys : result.categorys
+                }
+            })
+        }
+
+        if(responce.count > 0){
+            // res.status(200).json(responce);
+            // console.log(responce.category);
+            res.render('add-new-blog' , { category : responce.category })
+
+        }else{
+            res.status(505).json({
+                message : "Not Any Category Available"
+            })
+        }
+    })
+    .catch(err => {
+        res.status(505).json({
+            error : err
+        })
+    })
+
+    // res.render('add-new-blog');
+})
+
 
 
 app.get('/addnewcategory' , (req , res) =>{
     res.render('add-new-categories');
 })
 
-app.get('/addnewblog' , (req , res) =>{
-    res.render('add-new-blog');
-})
-
 app.get('/settings' , (req , res) =>{
     res.render('settings');
-})
-
-
-app.get('/allcategory' , (req , res) =>{
-    res.render('all-categories');
 })
 
 module.exports = app;

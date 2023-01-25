@@ -54,12 +54,10 @@
                         <i class="fas fa-users text-info"></i> 4 portions
                       </small>
                       
-                      <p class="card-text"><%= blogData[i].description %></p>
-                      <button href="#" class="btn btn-md btn-primary" value="">Edit</button>
-                      <button href="" class='btn btn-md btn-danger' value="">Delete</button>
+                      <p class="card-text blogdescription" id="blogdescriptions"><%= blogData[i].description %></p>
+                      <button href="#" class="btn btn-md btn-primary text-white" value="<%= blogData[i]._id %>">Edit</button>
+                      <button href="" class='dltbtn btn btn-md btn-danger text-white' value="<%= blogData[i]._id %>">Delete</button>
                     </div>
-
-
 
                     <div class="card-footer text-muted d-flex justify-content-between bg-transparent border-top-0">
                       <div class="views">Oct 20, 12:45PM
@@ -81,13 +79,56 @@
         </div><!--//container-fluid-->
     </div><!--//app-content-->
 
-    <!-- <script>
-          //  $(document).ready(function () {
-              alert("This is alert");
-              const temp = `<%- JSON.stringify(blogData) %>`;
-              alert(temp);
-          //  })
-    </script> -->
+  
+
+
+    <script>
+          
+           $(document).ready(function () {
+
+            // let blogDescription = document.getElementById('blogdescriptions').innerHTML;
+            
+            // console.log(blogDescription);
+
+            let blogDescription = document.getElementsByClassName('blogdescription').innerHTML;
+            console.log(blogDescription);
+
+            $('.blogdescription').each(function(){
+                let textConvert = $(this).text();
+                let temp = $(this).html(textConvert); 
+            })
+
+              // alert("This is alert");
+              // const temp = `<%- JSON.stringify(blogData) %>`;
+              // alert(temp);
+
+              // $("submit").click(function(){
+              //   $("p").append("<% blogData.description %>");
+              // });
+
+              $('.description').on('submit', function(){
+                $("p").append("<% blogData.description %>");
+                  
+              });
+
+
+              $('.dltbtn').on('click' , function(blogData) {
+
+                let id = $(this).val();
+                console.log(id);
+
+                $.ajax({
+                   type: "DELETE",
+                   url: `/blog/${id}`,
+                   success: function(data) {
+                    location.href = "/blog/getallblog";
+                   }
+                })
+              });
+
+
+           })
+    </script>
 
 
 

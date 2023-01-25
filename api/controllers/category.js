@@ -18,7 +18,10 @@ const getAllCategory = (req ,res, next) => {
         }
 
         if(responce.count > 0){
-            res.status(200).json(responce);
+            // res.status(200).json(responce);
+            // console.log(responce.category);
+            res.render('all-categories' , { category : responce.category })
+
         }else{
             res.status(505).json({
                 message : "Not Any Category Available"
@@ -63,18 +66,12 @@ const addCategory = (req , res , next) => {
 console.log('cggcgcg', req.body);
     const category = new Category({
         categorys : req.body.categorys,
-        // _id: new mongoose.Types.ObjectId()
     })
-
-    console.log("This is Category" + category);
-    
+ 
         category.save()
         .then(result => { 
-            console.log(result._id);  
-            res.status(200).json({
-                message: "Category Added",
-               createdCategory: category
-           })
+        
+           res.render('add-new-categories');
         })
         .catch(err =>{
             console.log(err, '4894894hyuy');
@@ -82,8 +79,6 @@ console.log('cggcgcg', req.body);
                 error : err
             })
         })
-  
-        
 }   
 
 // Delete Category

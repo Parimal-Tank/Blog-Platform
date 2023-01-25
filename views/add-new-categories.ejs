@@ -18,6 +18,9 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="../public/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head> 
 
 
@@ -31,11 +34,12 @@
             
             <h1 class="app-page-title">Add Category</h1>
 
-            <form class="form-inline d-flex justify-content-between">
+            <form method="post" action="/category/addCategory"  class="form-inline d-flex justify-content-between">
                 <div class="form-group mx-sm-3 mb-4" style="width: 100%;">
-                  <label for="inputPassword2" class="sr-only">Category</label>
-                  <input type="text" class="form-control" id="inputPassword2" placeholder="Enter New Categorie">      
+                  <label for="inputPassword2" class="sr-only" >Category</label>
+                  <input type="text" class="form-control" id="inputPassword2" placeholder="Enter New Categorie" name="categorys">      
                 </div>
+
               <button type="submit" class="btn btn-primary mr-2" style="width: 12%; height: 40px; color: white; margin-right: 1%;">Save</button>
               <button type="button" class="btn btn-danger" style="width: 12%; height: 40px; color: white;">Cancel</button>
             </form>

@@ -33,9 +33,8 @@ const addBlogDetails = async (req , res , next) =>{
         //      message: "Blog Created Successfully",
         //     createdBlog: blog
         // })
-
-        res.render('index');
-        
+        alert("Blog Added Successfully");
+        res.redirect('allblog');
     })
     .catch(err =>{
         res.status(500).json({
@@ -69,9 +68,9 @@ const getBlogDetails = (req , res , next) => {
 
             if(responce.count > 0){
 
-                console.log(responce);
             //    res.status(200).json(responce);
-
+            //         console.log(responce.blogs);
+                
                  res.render('allblog' , {blogData : responce.blogs});
                 
             }else{
