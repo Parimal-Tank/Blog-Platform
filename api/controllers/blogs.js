@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Blog = require('../models/blogModel');
 const cloudinary = require('cloudinary').v2;
 const slugify = require('slugify');
+const Category = require('../models/categoryModel');
 
 
 cloudinary.config({ 
@@ -13,28 +14,26 @@ cloudinary.config({
 // Add Blog Details
 const addBlogDetails = async (req , res , next) =>{
 
-
     const file = await req.files.photo;
     const result = await cloudinary.uploader.upload(file.tempFilePath);
-    console.log(result);
     
     const blog = new Blog({
         title : req.body.title,
-        category : req.body.category,
+        category : req.body.categorys,
         description : req.body.description,
         imagePath : result.url,
         slug : slugify(req.body.title , '-')
     })
    
-    blog.save()
+    await blog.save()
     .then(result => {
     
         // res.status(200).json({
         //      message: "Blog Created Successfully",
         //     createdBlog: blog
         // })
-        alert("Blog Added Successfully");
-        res.redirect('allblog');
+        // alert("Blog Added Successfully");
+        res.redirect('/blog/getallblog');
     })
     .catch(err =>{
         res.status(500).json({
@@ -66,18 +65,8 @@ const getBlogDetails = (req , res , next) => {
                 })
             }
 
-            if(responce.count > 0){
-
-            //    res.status(200).json(responce);
-            //         console.log(responce.blogs);
-                
-                 res.render('allblog' , {blogData : responce.blogs});
-                
-            }else{
-                res.status(505).json({
-                    message : "Not Any Blog Available"
-                })
-            }
+                 res.render('allblog' , {blogData : responce.blogs}); 
+        
         })
         .catch(err => {
             res.status(505).json({
@@ -90,10 +79,19 @@ const getBlogDetails = (req , res , next) => {
 
 const getBlogDetailsById = (req , res , next) => {
     const id = req.params.id;
-
-    Blog.findById({_id : id})
+    console.log("Get element by id called");
+    Blog.findById({_id : id}) 
     .then(result => {
-        res.status(500).json(result);
+        
+        Category.find()
+        .then(categorys =>{
+            res.render( 'update-blog' ,{result : result , category : categorys});
+
+        }).catch(err => {
+            res.status(500).json({
+                error : err
+            })
+        })
     })
     .catch(err => {
         res.status(500).json({
@@ -105,6 +103,8 @@ const getBlogDetailsById = (req , res , next) => {
 
 // Update the Blog Details
 const updateBlog = (req , res , next) => {
+    console.log(req.params);
+    console.log("Update Method Called");
 
     const id = req.params.id;
 

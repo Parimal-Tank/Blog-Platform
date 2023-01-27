@@ -12,7 +12,7 @@ router.get('/getallblog' , blogController.getBlogDetails);
 // Delete Blog
 router.delete('/:id' , blogController.deleteBlog);
 
-// Update Blog
+// Update Blog by ID
 router.put('/:id' , blogController.updateBlog);
 
 // Get Blog By Id

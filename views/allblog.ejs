@@ -55,7 +55,7 @@
                       </small>
                       
                       <p class="card-text blogdescription" id="blogdescriptions"><%= blogData[i].description %></p>
-                      <button href="#" class="btn btn-md btn-primary text-white" value="<%= blogData[i]._id %>">Edit</button>
+                      <button href="#" class="editbtn btn btn-md btn-primary text-white" value="<%= blogData[i]._id %>">Edit</button>
                       <button href="" class='dltbtn btn btn-md btn-danger text-white' value="<%= blogData[i]._id %>">Delete</button>
                     </div>
 
@@ -90,8 +90,8 @@
             
             // console.log(blogDescription);
 
-            let blogDescription = document.getElementsByClassName('blogdescription').innerHTML;
-            console.log(blogDescription);
+            // let blogDescription = document.getElementsByClassName('blogdescription').innerHTML;
+            // console.log(blogDescription);
 
             $('.blogdescription').each(function(){
                 let textConvert = $(this).text();
@@ -106,10 +106,10 @@
               //   $("p").append("<% blogData.description %>");
               // });
 
-              $('.description').on('submit', function(){
-                $("p").append("<% blogData.description %>");
+              // $('.description').on('submit', function(){
+              //   $("p").append("<% blogData.description %>");
                   
-              });
+              // });
 
 
               $('.dltbtn').on('click' , function(blogData) {
@@ -127,7 +127,16 @@
               });
 
 
+
+              $(".editbtn").on('click' , function(blogData) {
+
+                 document.location.href = `/blog/${$(this).val()}`;
+               
+              })
+
+
            })
+
     </script>
 
 

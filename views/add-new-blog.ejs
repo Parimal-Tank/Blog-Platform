@@ -33,20 +33,20 @@
             <form method="post" action="/blog/addblog" enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="exampleInputEmail1">Blog Title</label>
-                  <input type="text" class="form-control" name ="title"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title">
+                  <input type="text" class="form-control" name ="title"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title" required>
                   <!-- <small id="#" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
 
                 <label class="mt-4">Category</label>
                 <select class="form-select mb-3" name="categorys">
-                    <option selected >Select Category</option>
+                    <option selected require>Select Category</option>
                     <% for(let i=0 ; i< category.length ; i++) { %> 
                         <option  value="<%= category[i].categorys %>"><%= category[i].categorys %></option>
                      <% } %>
                 </select>
                 
                 <label >Description</label>
-                <textarea id="default" class="mt-4" name="description"></textarea>
+                <textarea id="default" class="mt-4" name="description" required></textarea>
 
                 
                 <div class="form-group mt-4">
@@ -54,7 +54,7 @@
                     <input type="file" class="form-control-file" id="exampleFormControlFile1" name="photo">
                 </div>
 
-                <button type="submit" class="btn btn-primary mt-4" onclick="formSubmit('form' , '/blog/addblog' , '/blog/getallblog')">Submit</button>
+                <button type="submit" class="btn btn-primary mt-4">Submit</button>
               </form>
             
         </div><!--//container-fluid-->
@@ -68,48 +68,6 @@
         tinymce.init({
                 selector: 'textarea#default'
         });
-
-        // function formSubmit(form, url, target) {
-        //     alert("function called");
-        //     $(form).submit(function(event) {
-        //         $.post(url, $(form).serialize())
-        //             .done(function(res) {
-        //                 if (res.success) {
-        //                     window.location = target;
-        //                 }
-        //                 else {
-        //                     alert(res.error);
-        //                 }
-        //             })
-        //             .fail(function(res) {
-        //                 alert("Server Error: " + res.status + " " + res.statusText);
-
-        //             })
-        //         event.preventDefault();
-        //     });
-        // }
-
-
-        // $(document).ready( function () {
-
-        //     $('form').submit(function(event) {
-        //         $.post('/blog/addblog', $('form').serialize())
-        //             .done(function(res) {
-        //                 if (res.success) {
-        //                     location.href = "/blog/getallblog";
-        //                     // window.location = target;
-        //                 }
-        //                 else {
-        //                     alert(res.error);
-        //                 }
-        //             })
-        //             .fail(function(res) {
-        //                 alert("Server Error: " + res.status + " " + res.statusText);
-        //             })
-        //         event.preventDefault();
-        //     });
-
-        // })
     </script>
 
 </body>

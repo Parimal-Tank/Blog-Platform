@@ -114,6 +114,10 @@ app.get('/addnewcategory' , (req , res) =>{
     res.render('add-new-categories');
 })
 
+app.get('/updateblog' , (req , res) =>{
+    res.render('update-blog' , {id : req.query.id});
+})
+
 app.get('/settings' , (req , res) =>{
     res.render('settings');
 })
