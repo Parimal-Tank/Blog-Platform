@@ -63,6 +63,8 @@ const login = (req, res , next) => {
             })
         }else{
             bcrypt.compare(req.body.password , user.password , (err , result)=> {
+
+
                 if(err){
                     res.status(401).json({
                         message : 'Auth Failed'

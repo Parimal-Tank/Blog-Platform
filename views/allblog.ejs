@@ -42,12 +42,12 @@
 
                
                   <div class="card">
-                    <img class="card-img" src="<%= blogData[i].imagePath %>" alt="Bologna">
-                      <p href="#" class="btn btn-light btn-sm" style="cursor: default;"><%= blogData[i].category %></p>
+                    <img class="blog-img card-img"  src="<%= blogData[i].imagePath %>" alt="Bologna">
+                      <p href="#" class="category btn btn-light btn-sm" style="cursor: default;"><%= blogData[i].category %></p>
             
 
                     <div class="card-body">
-                      <h4 class="card-title"><%= blogData[i].title %></h4>
+                      <h4 class="blog-title card-title"><%= blogData[i].title %></h4>
 
                       <small class="text-muted cat">
                         <i class="far fa-clock text-info"></i> 30 minutes
@@ -130,12 +130,21 @@
 
               $(".editbtn").on('click' , function(blogData) {
 
-                 document.location.href = `/blog/${$(this).val()}`;
-               
-              })
+                let id = $(this).val();
+                console.log(id);
 
+                $.ajax({
+                  type : 'GET',
+                  url : `/blog/${id}`,
+                  async : false,
+                  success : function( result , category) {
 
+                     location.href = `/blog/${id}`
+                  }
+                })
            })
+
+          })
 
     </script>
 

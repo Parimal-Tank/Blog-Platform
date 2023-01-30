@@ -79,7 +79,7 @@ const getBlogDetails = (req , res , next) => {
 
 const getBlogDetailsById = (req , res , next) => {
     const id = req.params.id;
-    console.log("Get element by id called");
+ 
     Blog.findById({_id : id}) 
     .then(result => {
         
@@ -103,16 +103,21 @@ const getBlogDetailsById = (req , res , next) => {
 
 // Update the Blog Details
 const updateBlog = (req , res , next) => {
-    console.log(req.params);
-    console.log("Update Method Called");
+    // console.log(req.params);
+    // console.log("Update Method Called");
 
     const id = req.params.id;
 
+    // console.log("Before the update" + req.body.description);
+
+   
     Blog.updateOne({_id : id} , {$set : req.body})
     .then(result =>{
+        // console.log("after update" + req.body.description);
+
         res.status(200).json({
             message : "Blog Update Successfully",
-            result
+            result : result
         });
     })
     .catch(err => {

@@ -18,18 +18,21 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="../public/css/cards.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-       <!-- App CSS -->  
+    <!-- App CSS -->  
     <!-- <link id="theme-style" rel="stylesheet" href="../public/css/style.css"> -->
-
-     <!-- TinyMCA Text Editor Script -->
-     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    
+    <!-- TinyMCA Text Editor Script -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    
     <script>
-          tinymce.init({
-                selector: 'textarea#blog-descriptions'
-           });
-    </script>
+      tinymce.init({
+        selector: 'textarea#blog-descriptions'
+      });
+      tinyMCE.activeEditor.setContent(data.selector);
+      </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 </head> 
 
@@ -73,7 +76,7 @@
                 <input type="file" class="form-control-file" id="blog-image" name="photo" value=""> 
             </div>
 
-            <button type="submit" class="updateCourse btn btn-primary mt-4">Submit</button>
+            <button type="button" class="updateCourse btn btn-primary mt-4" data-id="<%= result._id %>">Submit</button>
           </form>
         
     </div><!--//container-fluid-->
@@ -81,47 +84,57 @@
 
 
      <!-- Javascript -->    
-     <script src="../public/plugins/popper.min.js"></script>
-     <script src="../public/plugins/bootstrap/js/bootstrap.min.js"></script>  
+     <!-- <script src="../public/plugins/popper.min.js"></script>
+     <script src="../public/plugins/bootstrap/js/bootstrap.min.js"></script>   -->
  
      <!-- Charts JS
      <script src="assets/plugins/chart.js/chart.min.js"></script> 
      <script src="assets/js/index-charts.js"></script>  -->
      
      <!-- Page Specific JS -->
-     <script src="../public/js/app.js"></script> 
-
+     <!-- <script src="../public/js/app.js"></script>  -->
 
      <script>
 
-        $('.updateCourse').on('click' , function(result) {
+$(document).ready(function () {
 
+
+
+      
+        $('.updateCourse').on('click' , function(event) {
+
+          const id = $(this).data('id');
 
             const form = document.getElementById('form');
             const formData = new FormData(form);
 
+            const blogData = {};
+
          
             for (const [key, value] of formData) {
-                   console.log( `${key}: ${value}`);
+                   blogData[key] = value;
             }
 
-                $.ajax({
-                   type: "PUT",
-                   url: `/blog/${id}`,
-                   data: id,
-                   success: function(data) {
-                    location.href = "/blog/getallblog";
-                   }
-                })
+            console.log(blogData);
+
+            $('input[type="file"]').each((file , i) => {
+              blogData["photo"] = file;
+            })
+
+            $.ajax({
+                type: "put",
+                url: `/blog/${id}`,
+                data: blogData,
+                success: function(data) {
+                location.href = "/blog/getallblog";
+                }
+            })
+            event.preventDefault();
+
         });
 
+      })
    
-    
      </script>
-     
-
 </body>
-
-
-
 </html>

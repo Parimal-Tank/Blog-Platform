@@ -46,7 +46,7 @@ const getCategoryById = (req , res , next ) => {
 
         if(result){
             res.status(200).json({
-                category : result
+                category : result.categorys
             })
         }else{
             res.status(404).json({
@@ -108,12 +108,14 @@ const updateCategory = (req, res , next) => {
    
     const id = req.params.id;
 
-    Category.updateOne({_id : id} , {$set : req.body})
+    Category.updateOne({_id : id} , {$set : { categorys : req.body.category} })
     .exec()
     .then(result => {
         res.status(200).json({
+            result : result,
             message : "Category Updated"
         })
+        // res.render('all-categories' , {category : result});
     })
     .catch(err => {
         res.status(505).json({

@@ -18,6 +18,9 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="../../public/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </head> 
 
 
@@ -102,7 +105,7 @@
 
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link" href="/login">
+                        <a class="nav-link logout-btn" href="/login">
                             <span class="nav-icon">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-folder" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.828 4a3 3 0 0 1-2.12-.879l-.83-.828A1 1 0 0 0 6.173 2H2.5a1 1 0 0 0-1 .981L1.546 4h-1L.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3v1z"/>
@@ -174,6 +177,22 @@
     </div><!--//app-sidepanel-->
 
 
+
+    <script>
+        $(document).ready( function() {
+
+            $('.logout-btn').on('click' , function() {
+
+                $.ajax({
+                    type : "GET",
+                    url : '/user/logout',
+                    success : function() {
+                        location.href = "/login"
+                    }
+                })
+            })
+        })
+    </script>
      <!-- Javascript -->    
      <script src="../public/plugins/popper.min.js"></script>
      <script src="../public/plugins/bootstrap/js/bootstrap.min.js"></script>  
