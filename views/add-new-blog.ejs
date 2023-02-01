@@ -18,6 +18,8 @@
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="../public/css/style.css">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head> 
 
 <body>  
@@ -28,7 +30,7 @@
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">
             
-            <h1 class="app-page-title">Add New Blog</h1>
+            <h1 class="app-page-title mt-5">Add New Blog</h1>
             <!-- method="post" action="/blog/addblog" -->
             <form method="post" action="/blog/addblog" enctype="multipart/form-data">
                 <div class="form-group">
@@ -46,7 +48,7 @@
                 </select>
                 
                 <label >Description</label>
-                <textarea id="default" class="mt-4" name="description" required></textarea>
+                <textarea id="default" class="mt-4" name="description"></textarea>
 
                 
                 <div class="form-group mt-4">

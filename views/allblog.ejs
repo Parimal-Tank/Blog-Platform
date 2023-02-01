@@ -42,7 +42,7 @@
 
                
                   <div class="card">
-                    <img class="blog-img card-img"  src="<%= blogData[i].imagePath %>" alt="Bologna">
+                    <img class="blog-img card-img"  src="<%= blogData[i].image_url %>" alt="Bologna">
                       <p href="#" class="category btn btn-light btn-sm" style="cursor: default;"><%= blogData[i].category %></p>
             
 
@@ -50,8 +50,7 @@
                       <h4 class="blog-title card-title"><%= blogData[i].title %></h4>
 
                       <small class="text-muted cat">
-                        <i class="far fa-clock text-info"></i> 30 minutes
-                        <i class="fas fa-users text-info"></i> 4 portions
+                        <i class="fa-solid fa-calendar-days"></i></i> Published Date <%= blogData[i].createdAt.getDate() %>/<%= blogData[i].createdAt.getMonth() + 1 %>/<%= blogData[i].createdAt.getFullYear() %>
                       </small>
                       
                       <p class="card-text blogdescription" id="blogdescriptions"><%= blogData[i].description %></p>
@@ -138,7 +137,6 @@
                   url : `/blog/${id}`,
                   async : false,
                   success : function( result , category) {
-
                      location.href = `/blog/${id}`
                   }
                 })

@@ -19,6 +19,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.8.4",
     "path": "^0.12.7",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "toastr": "^2.1.4"
   }
 }

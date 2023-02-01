@@ -14,5 +14,4 @@ module.exports = function(){
     //     console.log("Mongodb Connected Successfully");
     // })
 
-
 }

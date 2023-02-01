@@ -9,12 +9,12 @@ const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
 // for storing the image in clounary
-const fileUpload = require('express-fileupload');
+// const fileUpload = require('express-fileupload');
 
 // for storing image in the clounary
-app.use(fileUpload({
-    useTempFiles : true
-}))
+// app.use(fileUpload({
+//     useTempFiles : true
+// }))
 
 // for ejs 
 app.set('view engine' , 'ejs');
@@ -26,7 +26,7 @@ app.set('views' , path.join(__dirname, './views'));
 app.use('/public' , express.static('public'));
 
 // for parsing the data
-app.use(express.urlencoded({extended : false}));
+app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 
 databaseConnect(app);
@@ -70,6 +70,10 @@ app.get('/help' , (req , res) =>{
 
 app.get('/reset-password' , (req , res) =>{
     res.render('reset-password');
+})
+
+app.get('/updateImage' , (req ,res) => {
+    res.render('updateImage' , { blogId : req.query.id });
 })
 
 app.get('/addnewblog' , (req , res) =>{

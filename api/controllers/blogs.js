@@ -21,7 +21,8 @@ const addBlogDetails = async (req , res , next) =>{
         title : req.body.title,
         category : req.body.categorys,
         description : req.body.description,
-        imagePath : result.url,
+        image_id: result.public_id,
+        image_url : result.url,
         slug : slugify(req.body.title , '-')
     })
    
@@ -50,7 +51,7 @@ const getBlogDetails = (req , res , next) => {
     Blog.find()
     .exec()
     .then(result => {
-         
+
             const responce = {
 
                 count : result.length,
@@ -60,13 +61,13 @@ const getBlogDetails = (req , res , next) => {
                         title : result.title,
                         category : result.category,
                         description : result.description,
-                        imagePath : result.imagePath
+                        image_id : result.image_id,
+                        image_url : result.image_url,
+                        createdAt : result.createdAt
                     }
                 })
             }
-
                  res.render('allblog' , {blogData : responce.blogs}); 
-        
         })
         .catch(err => {
             res.status(505).json({
@@ -102,30 +103,62 @@ const getBlogDetailsById = (req , res , next) => {
 }
 
 // Update the Blog Details
-const updateBlog = (req , res , next) => {
-    // console.log(req.params);
-    // console.log("Update Method Called");
+const updateBlog = async (req , res , next) => {
 
-    const id = req.params.id;
+    //  console.log(result);
+    // console.log(req.body);
+
+    // try{
+
+    // const currentBlog = await Blog.findById(req.params.id);
+
+    //  if(currentBlog.image_id !== ''){
+
+    //     const img_id =  currentBlog.image_id;
+
+    //     if(img_id){
+    //         await cloudinary.uploader.destroy(img_id);
+    //     }
+    //  }
+        //  const file = await req.files.photo;
+        //  const result = await cloudinary.uploader.upload(file.tempFilePath);
+
+        //  console.log(result);
+
+    //  const newImage = await cloudinary.uploader.upload(req.file.photo);
+
+    const id = req.params.id; 
 
     // console.log("Before the update" + req.body.description);
+    
+    // ,{ image_id : newImage.public_id} , {image_url : newImage.url}
 
-   
-    Blog.updateOne({_id : id} , {$set : req.body})
+    Blog.updateOne({_id : id} , {$set : req.body} )
     .then(result =>{
         // console.log("after update" + req.body.description);
 
-        res.status(200).json({
-            message : "Blog Update Successfully",
-            result : result
-        });
-    })
-    .catch(err => {
+        // res.status(200).json({
+        //     message : "Blog Update Successfully",
+        //     result : result
+        // });
+        res.redirect('/blog/getallblog');
+    }) .catch(err => {
+        console.log(err);
         res.status(500).json({
             error : err
         })
     })
-}
+
+    }
+    // catch(err) {
+    //     console.log('errrrrorrr');
+    //     console.log(err);
+
+    //     res.status(500).json({
+    //         error : err
+    //     })
+    // }
+// }
 
 // Delete the Blog Details
 

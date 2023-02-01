@@ -13,12 +13,21 @@
         type : String,
         require : true
     },
-    imagePath : {
-        type : String
+     image_id : {
+            type : String,
+            required : true
+    },
+    image_url : {
+            type : String,
+            required : true
     },
     slug : {
         type : String
     }
-   })
+   },{
+    timestamps : true
+   }
+   
+   )
 
    module.exports = mongoose.model('Blog' , blogSchema);
