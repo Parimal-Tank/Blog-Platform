@@ -48,11 +48,11 @@
         
         <h1 class="app-page-title mt-3">Update Blog</h1>
 
-        <form enctype="multipart/form-data" method="post" action="/blog/<%= blogId %>">
+        <form method="post" action="/blog/<%= blogId %>" enctype="multipart/form-data">
          
             <div class="form-group mt-4">
                 <label for="blog-image">Select Image</label>
-                <input type="file" class="form-control-file" id="blog-image" name="photo" value=""> 
+                <input type="file" class="form-control-file" id="blog-image" name="photo"> 
             </div>
 
             <button type="submit" class="btn btn-primary mt-4">Submit</button>

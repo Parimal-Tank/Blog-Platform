@@ -74,6 +74,7 @@
             <div class="form-group mt-4">  
 
                 <a href="/updateImage?id=<%= result._id %>">Edit Image</a>
+
             </div>
 
             <button type="button" class="updateCourse btn btn-primary mt-4" data-id="<%=result._id%>">Submit</button>
@@ -117,20 +118,14 @@ $(document).ready(function () {
 
             blogData['description'] = description;
 
-            // $('input[type="file"]').each((file , i) => {
-            //    blogData["photo"] = file;
-            // })
-
-            // console.log(blogData.photo);
-
             $.ajax({
                 type: "put",
-                url: `/blog/${id}`,
+                url: `/blog/${id.trim()}`,
                 data: blogData,
                 enctype : 'multipart/form-data',
                 success: function(data) {
-                 
-                   location.href = "/blog/getallblog";
+                  
+                   location.href = "/blog/getallblog"; 
                 }
             })
             event.preventDefault();

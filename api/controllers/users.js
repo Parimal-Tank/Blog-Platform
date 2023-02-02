@@ -66,6 +66,7 @@ const login = (req, res , next) => {
 
 
                 if(err){
+                 
                     res.status(401).json({
                         message : 'Auth Failed'
                     })
@@ -84,12 +85,14 @@ const login = (req, res , next) => {
                     ); 
                     
                     res.cookie("token" , token , {httpOnly : true }).send();
+                    
 
                     // res.status(200).json({
                     //     message : 'Auth Successfull',
                     //     token : token
                     // });
                 }else{
+                 
                     res.status(200).json({
                         message : 'Auth Failed'
                     });
@@ -98,9 +101,16 @@ const login = (req, res , next) => {
         }
     })
     .catch(err => {
-        res.status(500).json({
-            error : err
-        })
+
+// req.flash('success', 'Welcome!!')
+     
+      res.redirect('/'  , { error : err});
+
+      // req.flash("msg","Error Occured");
+      // res.locals.messages = req.flash();
+        // res.status(500).json({
+        //     error : err
+        // })
     })
 }
 

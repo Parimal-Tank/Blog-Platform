@@ -28,13 +28,9 @@ const addBlogDetails = async (req , res , next) =>{
    
     await blog.save()
     .then(result => {
-    
-        // res.status(200).json({
-        //      message: "Blog Created Successfully",
-        //     createdBlog: blog
-        // })
-        // alert("Blog Added Successfully");
+        // res.flash('success' , 'Blog Save Sucessfully');
         res.redirect('/blog/getallblog');
+
     })
     .catch(err =>{
         res.status(500).json({
@@ -105,43 +101,16 @@ const getBlogDetailsById = (req , res , next) => {
 // Update the Blog Details
 const updateBlog = async (req , res , next) => {
 
-    //  console.log(result);
-    // console.log(req.body);
+    const id = req.params.id.trim(); 
+    const {title, description, category} = req.body
+    const slug = slugify(req.body.title , '-');
 
-    // try{
-
-    // const currentBlog = await Blog.findById(req.params.id);
-
-    //  if(currentBlog.image_id !== ''){
-
-    //     const img_id =  currentBlog.image_id;
-
-    //     if(img_id){
-    //         await cloudinary.uploader.destroy(img_id);
-    //     }
-    //  }
-        //  const file = await req.files.photo;
-        //  const result = await cloudinary.uploader.upload(file.tempFilePath);
-
-        //  console.log(result);
-
-    //  const newImage = await cloudinary.uploader.upload(req.file.photo);
-
-    const id = req.params.id; 
-
-    // console.log("Before the update" + req.body.description);
-    
-    // ,{ image_id : newImage.public_id} , {image_url : newImage.url}
-
-    Blog.updateOne({_id : id} , {$set : req.body} )
+      Blog.updateOne({_id : id} , {$set : {title, description, category, slug} } )
     .then(result =>{
-        // console.log("after update" + req.body.description);
 
-        // res.status(200).json({
-        //     message : "Blog Update Successfully",
-        //     result : result
-        // });
-        res.redirect('/blog/getallblog');
+       return  res.status(200).json({
+            message: 'Updated'
+        })
     }) .catch(err => {
         console.log(err);
         res.status(500).json({
@@ -150,17 +119,48 @@ const updateBlog = async (req , res , next) => {
     })
 
     }
-    // catch(err) {
-    //     console.log('errrrrorrr');
-    //     console.log(err);
 
-    //     res.status(500).json({
-    //         error : err
-    //     })
-    // }
-// }
 
-// Delete the Blog Details
+const updateImage = async (req , res, next) => {
+
+    try {
+
+    const id = req.params.id; 
+
+    const currentBlog = await Blog.findById(req.params.id);
+
+    const img_id =  currentBlog.image_id;
+
+            if(img_id){
+                console.log("Image Destroy");
+                cloudinary.uploader.destroy(img_id)
+            }
+
+    const file = await req.files.photo;
+    const results = await cloudinary.uploader.upload(file.tempFilePath);
+    
+ 
+    Blog.updateOne({_id : id} , {$set : {image_id : results.public_id , image_url : results.url}} )
+    .then(result =>{
+        
+        res.redirect(`/blog/${id}`);
+
+    }) .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error : err
+        })
+    })
+
+} catch(error){
+    console.log(error);
+    res.status(500).json({
+        error : error
+    })
+}
+
+}
+
 
 const deleteBlog = (req , res , next) => {
 
@@ -185,5 +185,6 @@ module.exports = {
     addBlogDetails,
     deleteBlog,
     updateBlog,
-    getBlogDetailsById
+    getBlogDetailsById,
+    updateImage
 }

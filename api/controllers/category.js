@@ -108,7 +108,7 @@ const updateCategory = (req, res , next) => {
    
     const id = req.params.id;
 
-    Category.updateOne({_id : id} , {$set : { categorys : req.body.category} })
+    Category.updateOne({_id : id} , {$set : { categorys : req.body.category} } )
     .exec()
     .then(result => {
         res.status(200).json({

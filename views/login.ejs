@@ -21,14 +21,18 @@
     <!-- Jquery Link  -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+
+	<!-- <link data-minify="1" href="https://www.bacancytechnology.com/blog/wp-content/cache/min/1/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css?ver=1675156683" rel="stylesheet" type="text/css" > -->
 </head> 
 
-<body class="app app-login p-0">    	
+
+<body class="app app-login p-0">    
     <div class="row g-0 app-auth-wrapper">
 	    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
 		    <div class="d-flex flex-column align-content-end">
 			    <div class="app-auth-body mx-auto">	
 				    <div class="app-auth-branding mb-4"><a class="app-logo" href="/allblog"><img class="logo-icon me-2" src="../public/images/app-logo.svg" alt="logo"></a></div>
+					
 					<h2 class="auth-heading text-center mb-5">Log in to Portal</h2>
 			        <div class="auth-form-container text-start">
 						<form class="auth-form login-form">         
@@ -112,7 +116,7 @@
 					success : function(data) {
 						// alert(data)
 						// location.href = "/blog/getallblog"
-						location.assign('/blog/getallblog')
+						// location.assign('/blog/getallblog')
 					}
 				})
 
@@ -121,9 +125,10 @@
 				// 	});
 
 				
+				console.log('<%= error %>');
 			})
 
-
+			
 		})
 	</script>
 </body>

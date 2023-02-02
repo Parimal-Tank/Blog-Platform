@@ -7,7 +7,8 @@ const auth = require('../middleware/auth')
 // Add Blog
 router.post('/addblog' , auth , blogController.addBlogDetails);
 
-router.post('/:id' , blogController.updateBlog);
+// for update image
+router.post('/:id' , blogController.updateImage);
 
 //Get All Blog
 router.get('/getallblog' ,auth  , blogController.getBlogDetails);

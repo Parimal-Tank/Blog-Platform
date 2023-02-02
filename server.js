@@ -4,17 +4,36 @@ const databaseConnect = require('./app');
 const path = require('path');
 const Category = require('./api/models/categoryModel');
 
+const flash = require('connect-flash')
+const session = require('express-session')
+
+app.use(flash()); 
+
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
+app.use(function(req, res, next){
+    res.locals.message = req.flash();
+    next();
+});
+
+
+
 // for logout fuctionality
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
+// app.use(cookieParser('secret'));
 
 // for storing the image in clounary
-// const fileUpload = require('express-fileupload');
+const fileUpload = require('express-fileupload');
 
 // for storing image in the clounary
-// app.use(fileUpload({
-//     useTempFiles : true
-// }))
+app.use(fileUpload({
+    useTempFiles : true
+}))
 
 // for ejs 
 app.set('view engine' , 'ejs');
@@ -44,16 +63,26 @@ app.listen(3000 , function(){
     console.log("Server Started.......3000");
 })
 
-app.get('/login' , (req , res) => {
-    res.render('login');
-})
+// app.get('/login' , (req , res , next) => {
+
+   
+
+    // console.log(message);
+  
+    // req.flash('success', 'Welcome!!')
+//     res.render('login');
+// })
 
 // app.get('/' , (req , res) => {
 //      res.render('allblog');
 // })
 
 app.get('/' , (req , res) =>{
-    res.render('login');
+    // req.flash('success', 'Welcome!!');
+    // res.redirect('/login');
+    console.log(req.error);
+  
+    res.render('login')
 })
 
 app.get('/notification' , (req , res) =>{
