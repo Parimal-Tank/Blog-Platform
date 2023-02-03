@@ -4,11 +4,9 @@ module.exports = (req , res , next)=>{
 
     try{
         const token = req.cookies.token;
-        // console.log(token);
-        // console.log("cookie data getting");
+    
+        // Verifie the user
         const verifyUser = jwt.verify(token , process.env.JWT_KEY);
-        // console.log(verifyUser);
-
         req.userData = verifyUser;
         next();
     }

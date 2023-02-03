@@ -3,11 +3,10 @@ const app = express();
 const databaseConnect = require('./app');
 const path = require('path');
 const Category = require('./api/models/categoryModel');
+const Blog = require('./api/models/blogModel')
 
 const flash = require('connect-flash')
 const session = require('express-session')
-
-app.use(flash()); 
 
 app.use(session({
     secret: 'secret',
@@ -15,9 +14,11 @@ app.use(session({
     resave: true
 }));
 
+app.use(flash()); 
+
 app.use(function(req, res, next){
     res.locals.message = req.flash();
-    next();
+    next(); 
 });
 
 
@@ -25,7 +26,7 @@ app.use(function(req, res, next){
 // for logout fuctionality
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
-// app.use(cookieParser('secret'));
+
 
 // for storing the image in clounary
 const fileUpload = require('express-fileupload');
@@ -38,7 +39,6 @@ app.use(fileUpload({
 // for ejs 
 app.set('view engine' , 'ejs');
 app.set('views' , path.join(__dirname, './views'));
-// app.set('views' , path.join(__dirname, './views/partials'));
 
 
 //for static file
@@ -63,26 +63,15 @@ app.listen(3000 , function(){
     console.log("Server Started.......3000");
 })
 
-// app.get('/login' , (req , res , next) => {
-
-   
-
-    // console.log(message);
+app.get('/login' , (req , res , next) => {
   
-    // req.flash('success', 'Welcome!!')
-//     res.render('login');
-// })
+    res.render('login');
+})
 
-// app.get('/' , (req , res) => {
-//      res.render('allblog');
-// })
+
 
 app.get('/' , (req , res) =>{
-    // req.flash('success', 'Welcome!!');
-    // res.redirect('/login');
-    console.log(req.error);
-  
-    res.render('login')
+    res.render('login');
 })
 
 app.get('/notification' , (req , res) =>{
@@ -122,8 +111,7 @@ app.get('/addnewblog' , (req , res) =>{
         }
 
         if(responce.count > 0){
-            // res.status(200).json(responce);
-            // console.log(responce.category);
+
             res.render('add-new-blog' , { category : responce.category })
 
         }else{
@@ -138,8 +126,9 @@ app.get('/addnewblog' , (req , res) =>{
         })
     })
 
-    // res.render('add-new-blog');
+
 })
+
 
 
 

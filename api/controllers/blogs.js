@@ -3,8 +3,9 @@ const Blog = require('../models/blogModel');
 const cloudinary = require('cloudinary').v2;
 const slugify = require('slugify');
 const Category = require('../models/categoryModel');
+const { check , validationResult } = require('express-validator');
 
-
+// Used For Cloudnary
 cloudinary.config({ 
     cloud_name: 'dt39lgelf', 
     api_key: '338396821511569', 
@@ -13,30 +14,38 @@ cloudinary.config({
 
 // Add Blog Details
 const addBlogDetails = async (req , res , next) =>{
+     
+    // For Validation
+    const error = validationResult(req);
+    if(!error.isEmpty()){
+      const alert = error.array()
+      res.render('add-new-blog' , { alert, data: req.body } )
+    }else{
 
-    const file = await req.files.photo;
-    const result = await cloudinary.uploader.upload(file.tempFilePath);
-    
-    const blog = new Blog({
-        title : req.body.title,
-        category : req.body.categorys,
-        description : req.body.description,
-        image_id: result.public_id,
-        image_url : result.url,
-        slug : slugify(req.body.title , '-')
-    })
-   
-    await blog.save()
-    .then(result => {
-        // res.flash('success' , 'Blog Save Sucessfully');
-        res.redirect('/blog/getallblog');
-
-    })
-    .catch(err =>{
-        res.status(500).json({
-            message : err
+        const file = await req.files.photo;
+        const result = await cloudinary.uploader.upload(file.tempFilePath);
+        
+        const blog = new Blog({
+            title : req.body.title,
+            category : req.body.categorys,
+            description : req.body.description,
+            image_id: result.public_id,
+            image_url : result.url,
+            slug : slugify(req.body.title , '-')
         })
-    })
+       
+        await blog.save()
+        .then(result => {
+          
+            res.redirect('/blog/getallblog');
+    
+        })
+        .catch(err =>{
+            res.status(500).json({
+                message : err
+            })
+        })
+    }
     
 }
 
@@ -120,7 +129,7 @@ const updateBlog = async (req , res , next) => {
 
     }
 
-
+//  Update Image
 const updateImage = async (req , res, next) => {
 
     try {
@@ -161,7 +170,7 @@ const updateImage = async (req , res, next) => {
 
 }
 
-
+// Delete Blog By Id
 const deleteBlog = (req , res , next) => {
 
     const id = req.params.id;

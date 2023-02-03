@@ -9,9 +9,4 @@ module.exports = function(){
 
     });
 
-
-    // mongoose.connect(`mongodb+srv://root:root@blog-platform.j3txkcx.mongodb.net/blogDB` , () => {
-    //     console.log("Mongodb Connected Successfully");
-    // })
-
 }

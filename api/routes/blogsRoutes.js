@@ -1,11 +1,16 @@
 const express = require('express');
+const { check, validationResult } = require('express-validator');
 const router =  express.Router();
 const blogController = require('../controllers/blogs');
 const auth = require('../middleware/auth')
 
 
 // Add Blog
-router.post('/addblog' , auth , blogController.addBlogDetails);
+router.post('/addblog' , auth ,
+    check('title' , 'This title must be a 3+ long')
+        .exists()
+        .isLength({min : 3})
+, blogController.addBlogDetails);
 
 // for update image
 router.post('/:id' , blogController.updateImage);

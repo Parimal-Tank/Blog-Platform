@@ -39,7 +39,6 @@
             <div class="row">
               <% for(let i=0 ; i< blogData.length; i++){ %>   
               <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-5">
-
                
                   <div class="card">
                     <img class="blog-img card-img"  src="<%= blogData[i].image_url %>" alt="Bologna">
@@ -85,46 +84,29 @@
           
            $(document).ready(function () {
 
-          
-
-            // let blogDescription = document.getElementById('blogdescriptions').innerHTML;
-            
-            // console.log(blogDescription);
-
-            // let blogDescription = document.getElementsByClassName('blogdescription').innerHTML;
-            // console.log(blogDescription);
 
             $('.blogdescription').each(function(){
                 let textConvert = $(this).text();
                 let temp = $(this).html(textConvert); 
             })
 
-              // alert("This is alert");
-              // const temp = `<%- JSON.stringify(blogData) %>`;
-              // alert(temp);
-
-              // $("submit").click(function(){
-              //   $("p").append("<% blogData.description %>");
-              // });
-
-              // $('.description').on('submit', function(){
-              //   $("p").append("<% blogData.description %>");
-                  
-              // });
-
 
               $('.dltbtn').on('click' , function(blogData) {
 
-                let id = $(this).val();
-                console.log(id);
+                if (confirm("Are you sure to delete this Blog!") == true) {
 
-                $.ajax({
-                   type: "DELETE",
-                   url: `/blog/${id}`,
-                   success: function(data) {
-                    location.href = "/blog/getallblog";
-                   }
-                })
+                  let id = $(this).val();
+                  console.log(id);
+  
+                  $.ajax({
+                     type: "DELETE",
+                     url: `/blog/${id}`,
+                     success: function(data) {
+                      location.href = "/blog/getallblog";
+                     }
+                  })
+                }
+
               });
 
 
@@ -154,9 +136,6 @@
      <script src="../public/plugins/popper.min.js"></script>
      <script src="../public/plugins/bootstrap/js/bootstrap.min.js"></script>  
  
-     <!-- Charts JS
-     <script src="assets/plugins/chart.js/chart.min.js"></script> 
-     <script src="assets/js/index-charts.js"></script>  -->
      
      <!-- Page Specific JS -->
      <script src="../public/js/app.js"></script> 

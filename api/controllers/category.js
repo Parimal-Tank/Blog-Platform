@@ -18,8 +18,6 @@ const getAllCategory = (req ,res, next) => {
         }
 
         if(responce.count > 0){
-            // res.status(200).json(responce);
-            // console.log(responce.category);
             res.render('all-categories' , { category : responce.category })
 
         }else{
@@ -63,7 +61,7 @@ const getCategoryById = (req , res , next ) => {
 
 // Add Category
 const addCategory = (req , res , next) => {
-console.log('cggcgcg', req.body);
+
     const category = new Category({
         categorys : req.body.categorys,
     })
@@ -74,7 +72,7 @@ console.log('cggcgcg', req.body);
            res.render('add-new-categories');
         })
         .catch(err =>{
-            console.log(err, '4894894hyuy');
+            
             res.status(500).json({
                 error : err
             })
@@ -115,7 +113,7 @@ const updateCategory = (req, res , next) => {
             result : result,
             message : "Category Updated"
         })
-        // res.render('all-categories' , {category : result});
+
     })
     .catch(err => {
         res.status(505).json({

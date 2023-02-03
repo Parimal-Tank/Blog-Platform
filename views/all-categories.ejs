@@ -108,7 +108,10 @@
 
               $('.dltbtn').on('click' , function() {
 
-                let id = $(this).val();
+              
+        
+                if (confirm("Are you sure to delete this category!") == true) {
+                   let id = $(this).val();
 
                 $.ajax({
                    type: "DELETE",
@@ -118,6 +121,8 @@
                     location.href = "/category/getAllCategory";
                    }
                 })
+                }
+               
               });
 
 
@@ -139,8 +144,7 @@
 
                   let categoryUpdated = { category : category.val()}
 
-                  // console.log(categoryUpdated);
-             
+               
 
                 $.ajax({
                   type: 'PUT',
@@ -148,7 +152,7 @@
                     data: categoryUpdated,
 
                     success: function (data) { 
-                         // window.reload();
+                       
                       location.href = "/category/getAllCategory";
                     }, 
                 })
@@ -176,11 +180,11 @@
                         category: category.category
                       }
                     
-                    // console.log(data);
+            
                   }
 
               })
-              // console.log(data);
+             
               return data;
 
             }
