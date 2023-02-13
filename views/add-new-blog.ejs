@@ -35,9 +35,9 @@
             <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
                 <strong>Hello Admin!</strong> This Title must be a 3+ long
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div> -->
+            </div> -->
 
-              <% if(typeof alert != 'undefined') { %>
+            <% if(typeof alert != 'undefined') { %>
                 <% alert.forEach(function(error) { %>
                     <div class="alert alert-warning alert-dismissible fade show" id="btn" role="alert">
                         <%= error.msg %>
@@ -54,9 +54,8 @@
                 <div class="form-group">
                   <label for="exampleInputEmail1">Blog Title</label>
                  
-                  <input type="text" class="form-control" name ="title" minlength="3" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title" required value="">
+                  <input type="text" class="form-control" name ="title"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title" required>
 
-                  <!-- <small id="#" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
                 </div>
 
                 <% if (typeof alert != 'undefined'){%>
