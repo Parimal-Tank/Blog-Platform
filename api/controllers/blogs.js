@@ -36,9 +36,7 @@ const addBlogDetails = async (req , res , next) =>{
        
         await blog.save()
         .then(result => {
-          
             res.redirect('/blog/getallblog');
-    
         })
         .catch(err =>{
             res.status(500).json({
@@ -110,24 +108,33 @@ const getBlogDetailsById = (req , res , next) => {
 // Update the Blog Details
 const updateBlog = async (req , res , next) => {
 
-    const id = req.params.id.trim(); 
-    const {title, description, category} = req.body
-    const slug = slugify(req.body.title , '-');
+     // For Validation
+     const error = validationResult(req);
+     
+     if(!error.isEmpty()){
+        console.log(error);
+        res.status(400).send(error);
+     }else{
 
-      Blog.updateOne({_id : id} , {$set : {title, description, category, slug} } )
-    .then(result =>{
+        const id = req.params.id.trim(); 
+        const {title, description} = req.body
+        const category = req.body.categorys
+        const slug = slugify(req.body.title , '-');
 
-       return  res.status(200).json({
-            message: 'Updated'
+        Blog.updateOne({_id : id} , {$set : {title, description, category, slug} })
+        .then(result =>{
+
+        return  res.status(200).json({
+                message: 'Updated'
+            })
+        }) .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error : err
+            })
         })
-    }) .catch(err => {
-        console.log(err);
-        res.status(500).json({
-            error : err
-        })
-    })
-
-    }
+}
+}
 
 //  Update Image
 const updateImage = async (req , res, next) => {

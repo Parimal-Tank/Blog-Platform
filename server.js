@@ -68,26 +68,8 @@ app.get('/login' , (req , res , next) => {
     res.render('login');
 })
 
-
-
 app.get('/' , (req , res) =>{
     res.render('login');
-})
-
-app.get('/notification' , (req , res) =>{
-    res.render('notification');
-})
-
-app.get('/account' , (req , res) =>{
-    res.render('account');
-})
-
-app.get('/help' , (req , res) =>{
-    res.render('help');
-})
-
-app.get('/reset-password' , (req , res) =>{
-    res.render('reset-password');
 })
 
 app.get('/updateImage' , (req ,res) => {
@@ -129,19 +111,12 @@ app.get('/addnewblog' , (req , res) =>{
 
 })
 
-
-
-
 app.get('/addnewcategory' , (req , res) =>{
     res.render('add-new-categories');
 })
 
 app.get('/updateblog' , (req , res) =>{
     res.render('update-blog' , {id : req.query.id});
-})
-
-app.get('/settings' , (req , res) =>{
-    res.render('settings');
 })
 
 module.exports = app;

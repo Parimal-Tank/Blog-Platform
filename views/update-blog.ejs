@@ -36,7 +36,8 @@
 
 </head> 
 
-<body> 
+<body>
+
   <header class="app-header fixed-top"> 
     <%- include('partials/nav.ejs') -%>
     <%- include('partials/menubar.ejs') -%>
@@ -47,14 +48,11 @@
     <div class="container-xl">
         
         <h1 class="app-page-title mt-3">Update Blog</h1>
-        <!-- method="post" action="/blog/addblog" action="/blog/<%= result._id %>" -->
-
         <form enctype="multipart/form-data" id="form">
            
             <div class="form-group">
               <label for="exampleInputEmail1" >Blog Title</label>
-              <input type="text" class="form-control" id="blog-title" name ="title" value="<%= result.title %>"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title">
-              <!-- <small id="#" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+              <input type="text" class="form-control" id="blog-title" maxlength="15" name ="title" value="<%= result.title %>"  id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter blog title" required>
             </div>
 
             <label class="mt-4">Category</label>
@@ -68,12 +66,10 @@
             </select>
             
             <label >Description</label>
-            <textarea id="blog-descriptions" class="mt-4" name="description" value=""><%= result.description %></textarea>
+            <textarea id="blog-descriptions" class="mt-4" name="description" value="" required><%= result.description %></textarea>
             
             <div class="form-group mt-4">  
-
                 <a href="/updateImage?id=<%= result._id %>">Edit Image</a>
-
             </div>
 
             <button type="button" class="updateCourse btn btn-primary mt-4" data-id="<%=result._id%>">Submit</button>
@@ -94,9 +90,6 @@
 
 $(document).ready(function () {
 
-
-
-      
         $('.updateCourse').on('click' , function(event) {
 
           // toastr.info('Page Loaded!');
@@ -125,6 +118,9 @@ $(document).ready(function () {
                 success: function(data) {
                   
                    location.href = "/blog/getallblog"; 
+                } ,
+                error : function(){
+                  alert("Title must in between 3 to 15 character");
                 }
             })
             event.preventDefault();
